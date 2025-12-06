@@ -19,7 +19,12 @@ export interface FileTrail {
   /**
    * Records a file visit. Marks the file and all its ancestor directories as visited.
    * 
-   * @param filePath - The absolute or relative path to the file being visited
+   * **Note:** Relative paths are not currently supported. Only absolute paths are accepted.
+   * If you would find value in relative path support, please let me know:
+   * https://github.com/bkotos/file-trail/issues/new
+   * 
+   * @param filePath - The absolute path to the file being visited
+   * @throws {Error} If a relative path is provided
    * 
    * @example
    * ```typescript
@@ -144,6 +149,9 @@ export const FileTrail = (): FileTrail => {
   
   return {
     visit: (filePath: string) => {
+      if (!path.isAbsolute(filePath)) {
+        throw new Error('Relative paths are not currently supported. Is this something you would find value in? I would love to hear from you: https://github.com/bkotos/file-trail/issues/new')
+      }
       visitInvocations.push(filePath)
       markCompleted(filePath)
       markVisited(filePath)

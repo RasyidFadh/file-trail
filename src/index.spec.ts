@@ -93,6 +93,17 @@ describe(FileTrail.name, () => {
     // assert
     expect(fileTrail.hasCompleted('/')).toBe(false)
   })
+
+  it('should throw an error when visiting a relative path', () => {
+    // act
+    const fileTrail = FileTrail()
+    const act = () => {
+      fileTrail.visit('file.txt')
+    }
+
+    // assert
+    expect(act).toThrow('Relative paths are not currently supported. Is this something you would find value in? I would love to hear from you: https://github.com/bkotos/file-trail/issues/new')
+  })
 })
 
 describe(hydrate.name, () => {
