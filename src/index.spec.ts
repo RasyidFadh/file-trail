@@ -124,4 +124,23 @@ describe('serilization and hydration', () => {
       expect(hydrated.hasVisited(x)).toBe(false)
     })
   })
+
+  it('should return the same hasCompleted results for both the original and hydrated breadcrumbs', () => {
+    // act
+    const original = Breadcrumbs()
+    original.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    original.visit('/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG')
+    const serialized = original.serialize()
+    const hydrated = hydrate(serialized)
+
+    // assert - completed
+    const completed = '/var/home/jdoe/Pictures/2022/12'
+    expect(original.hasCompleted(completed)).toBe(true)
+    expect(hydrated.hasCompleted(completed)).toBe(true)
+
+    // assert - NOT completed
+    const notCompleted = '/var/home/jdoe/Pictures/2022/11'
+    expect(original.hasCompleted(notCompleted)).toBe(false)
+    expect(hydrated.hasCompleted(notCompleted)).toBe(false)
+  })
 })
