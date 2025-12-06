@@ -144,3 +144,14 @@ describe(hydrate.name, () => {
     expect(hydrated.hasCompleted(notCompleted)).toBe(false)
   })
 })
+
+describe('serialize', () => {
+  it('should return an empty string by default', () => {
+    // act
+    const breadcrumbs = Breadcrumbs()
+    const serialized = breadcrumbs.serialize()
+
+    // assert
+    expect(serialized).toBe('')
+  })
+})

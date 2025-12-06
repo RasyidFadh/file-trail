@@ -37,6 +37,9 @@ export const Breadcrumbs = () => {
       return completed[filePath] || false
     },
     serialize: () => {
+      if(visitInvocations.length === 0) {
+        return ''
+      }
       return JSON.stringify(visitInvocations)
     }
   };
