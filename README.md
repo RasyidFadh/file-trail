@@ -1,0 +1,55 @@
+# 🛤️ file-trail
+
+Keep track of which files and directories you've visited, and detect when you've finished exploring a directory (moved on to a different one). Useful for file system navigation, progress tracking, and resumable operations.
+
+## Installation
+
+```bash
+npm install file-trail
+```
+
+## Usage
+
+```typescript
+import { Breadcrumbs } from 'file-trail';
+
+const trail = Breadcrumbs();
+
+// Visit files
+trail.visit('/path/to/file1.txt');
+trail.visit('/path/to/file2.txt');
+
+// Check if visited
+trail.hasVisited('/path/to'); // true
+
+// Check if directory is completed (visited then left)
+trail.hasCompleted('/path/to'); // false (still in this directory)
+trail.visit('/other/path/file.txt');
+trail.hasCompleted('/path/to'); // true (moved to different directory)
+```
+
+## Serialization
+
+```typescript
+import { Breadcrumbs, hydrate } from 'file-trail';
+import { writeFileSync, readFileSync } from 'fs';
+
+const trail = Breadcrumbs();
+trail.visit('/path/to/file.txt');
+
+// Save
+const serialized = trail.serialize();
+writeFileSync('.file-trail', serialized);
+
+// Restore
+const restored = hydrate(readFileSync('.file-trail', 'utf-8'));
+```
+
+## API
+
+- `Breadcrumbs()` - Create a new trail instance
+- `visit(filePath: string)` - Record a file visit (marks file and all ancestors as visited)
+- `hasVisited(filePath: string): boolean` - Check if a path was visited
+- `hasCompleted(filePath: string): boolean` - Check if a directory is completed (visited then left)
+- `serialize(): string` - Serialize state to string
+- `hydrate(serialized: string): Breadcrumbs` - Restore from serialized string
