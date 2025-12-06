@@ -1,5 +1,7 @@
 import path from 'path';
 
+const serilizationPrefix = 'bc@1.0.0:'
+
 export const Breadcrumbs = () => {
   const visited: Record<string, boolean> = {}
   const completed: Record<string, boolean> = {}
@@ -40,13 +42,14 @@ export const Breadcrumbs = () => {
       if(visitInvocations.length === 0) {
         return ''
       }
-      return JSON.stringify(visitInvocations)
+      return `${serilizationPrefix}${JSON.stringify(visitInvocations)}`
     }
   };
 }
 
 export const hydrate = (serialized: string) => {
-  const visitInvocations: string[] = JSON.parse(serialized)
+  const raw = serialized.slice(serilizationPrefix.length)
+  const visitInvocations: string[] = JSON.parse(raw)
   const breadcrumbs = Breadcrumbs()
   visitInvocations.forEach(x => breadcrumbs.visit(x))
   return breadcrumbs

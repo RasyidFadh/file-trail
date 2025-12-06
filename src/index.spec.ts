@@ -154,4 +154,14 @@ describe('serialize', () => {
     // assert
     expect(serialized).toBe('')
   })
+
+  it('should include the version in the serialized output', () => {
+    // act
+    const breadcrumbs = Breadcrumbs()
+    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const serialized = breadcrumbs.serialize()
+
+    // assert
+    expect(serialized.startsWith('bc@1.0.0:')).toBe(true)
+  })
 })
