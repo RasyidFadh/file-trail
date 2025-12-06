@@ -127,6 +127,15 @@ describe(FileTrail.name, () => {
         expect(act).not.toThrow()
       })
     })
+
+    it('should say that I visited the parent directory of a file when called with the parent directory of a file', () => {
+      // act
+      const fileTrail = FileTrail()
+      fileTrail.visit('C:\\Users\\jdoe\\Pictures\\2022\\12\\IMG_6532.PNG')
+
+      // assert
+      expect(fileTrail.hasVisited('C:\\Users\\jdoe\\Pictures\\2022\\12')).toBe(true)
+    })
   })
 })
 

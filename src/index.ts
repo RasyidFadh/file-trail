@@ -146,10 +146,19 @@ export const FileTrail = (): FileTrail => {
     }
   }
 
+  const normalizeFilePath = (filePath: string) => {
+    const isWindowsPath = filePath.startsWith('C:\\')
+    if (isWindowsPath) {
+      filePath = filePath.replace(/^C:\\/, '/C/').replace(/\\/g, '/')
+    }
+    return filePath
+  }
+
   const visitInvocations: string[] = []
   
   return {
     visit: (filePath: string) => {
+      filePath = normalizeFilePath(filePath)
       const isWindowsPath = /^[A-Za-z]:\\/.test(filePath)
       if (!path.isAbsolute(filePath) && !isWindowsPath) {
         throw new Error('Relative paths are not currently supported. Is this something you would find value in? I would love to hear from you: https://github.com/bkotos/file-trail/issues/new')
@@ -159,6 +168,7 @@ export const FileTrail = (): FileTrail => {
       markVisited(filePath)
     },
     hasVisited: (filePath: string) => {
+      filePath = normalizeFilePath(filePath)
       return visited[filePath] || false
     },
     hasCompleted: (filePath: string) => {
