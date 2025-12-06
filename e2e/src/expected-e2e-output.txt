@@ -1,0 +1,18 @@
+hasVisited /var/home/jdoe/Pictures/2022/11:  true
+hasVisited /var/home/jdoe/Pictures/2022:  true
+hasVisited /:  true
+
+Before visiting /var/home/jdoe/Pictures/2022/12:
+hasVisited /var/home/jdoe/Pictures/2022/12:  false
+hasCompleted /var/home/jdoe/Pictures/2022/11:  false
+
+After visiting /var/home/jdoe/Pictures/2022/12:
+hasVisited /var/home/jdoe/Pictures/2022/12:  true
+hasCompleted /var/home/jdoe/Pictures/2022/11:  true
+serialize:  ft@1.0.0:["/var/home/jdoe/Pictures/2022/11/IMG_6532.PNG","/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG","/var/home/jdoe/Pictures/2022/12/IMG_6534.PNG"]
+hydrate:  {
+  visit: [Function: visit],
+  hasVisited: [Function: hasVisited],
+  hasCompleted: [Function: hasCompleted],
+  serialize: [Function: serialize]
+}
