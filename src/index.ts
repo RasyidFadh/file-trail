@@ -4,8 +4,11 @@ export const Breadcrumbs = () => {
   const visited: Record<string, boolean> = {}
   return {
     visit: (filePath: string) => {
-      visited[filePath] = true
-      visited[path.dirname(filePath)] = true
+      let current = filePath
+      do {
+        visited[current] = true
+        current = path.dirname(current)
+      } while (current !== '/')
     },
     hasVisited: (filePath: string) => {
       return visited[filePath] || false
