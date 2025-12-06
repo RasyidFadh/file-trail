@@ -9,6 +9,7 @@ export const Breadcrumbs = () => {
         visited[current] = true
         current = path.dirname(current)
       } while (current !== '/')
+      visited['/'] = true
     },
     hasVisited: (filePath: string) => {
       return visited[filePath] || false

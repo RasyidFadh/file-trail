@@ -45,4 +45,13 @@ describe(Breadcrumbs.name, () => {
     // assert
     expect(breadcrumbs.hasVisited('/var/home/jdoe/Pictures/2022')).toBe(true)
   })
+
+  it('should say that I vitied root directory after visiting a file', () => {
+    // act
+    const breadcrumbs = Breadcrumbs()
+    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+
+    // assert
+    expect(breadcrumbs.hasVisited('/')).toBe(true)
+  })
 })
