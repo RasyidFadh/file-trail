@@ -42,9 +42,9 @@
     "test:no-watch": "vitest --no-watch",
     "e2e": "npm run build && cd e2e && npm test",
     "e2e:post-deploy": "cd e2e && E2E_POST_DEPLOY=true npm test",
-    "publish:patch": "npm run test:no-watch && npm run e2e && npm version patch && npm publish",
-    "publish:minor": "npm run test:no-watch && npm run e2e && npm version minor && npm publish",
-    "publish:major": "npm run test:no-watch && npm run e2e && npm version major && npm publish"
+    "publish:patch": "npm run test:no-watch && npm run e2e && npm version patch && npm publish && npm run e2e:post-deploy",
+    "publish:minor": "npm run test:no-watch && npm run e2e && npm version minor && npm publish && npm run e2e:post-deploy",
+    "publish:major": "npm run test:no-watch && npm run e2e && npm version major && npm publish && npm run e2e:post-deploy"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
