@@ -138,18 +138,20 @@ export const FileTrail = (): FileTrail => {
    */
   const markVisited = (filePath: string) => {
     let current = filePath
-    do {
+    let previous = ''
+    while (current !== previous) {
       visited[current] = true
+      previous = current
       current = path.dirname(current)
-    } while (current !== '/')
-    visited['/'] = true
+    }
   }
 
   const visitInvocations: string[] = []
   
   return {
     visit: (filePath: string) => {
-      if (!path.isAbsolute(filePath)) {
+      const isWindowsPath = /^[A-Za-z]:\\/.test(filePath)
+      if (!path.isAbsolute(filePath) && !isWindowsPath) {
         throw new Error('Relative paths are not currently supported. Is this something you would find value in? I would love to hear from you: https://github.com/bkotos/file-trail/issues/new')
       }
       visitInvocations.push(filePath)

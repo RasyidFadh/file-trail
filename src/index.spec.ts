@@ -109,6 +109,19 @@ describe(FileTrail.name, () => {
       })
     })
   })
+
+  describe('windows', () => {
+    it('should let me visit a windows path', () => {
+      // act
+      const fileTrail = FileTrail()
+      const act = () => {
+        fileTrail.visit('C:\\Users\\jdoe\\Pictures\\2022\\12\\IMG_6532.PNG')
+      }
+
+      // assert
+      expect(act).not.toThrow()
+    })
+  })
 })
 
 describe(hydrate.name, () => {
