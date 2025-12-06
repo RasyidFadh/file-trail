@@ -63,4 +63,14 @@ describe(Breadcrumbs.name, () => {
     // assert
     expect(breadcrumbs.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(false)
   })
+
+  it('should NOT say that I completed a directory after visiting two files in it', () => {
+    // act
+    const breadcrumbs = Breadcrumbs()
+    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6533.PNG')
+
+    // assert
+    expect(breadcrumbs.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(false)
+  })
 })
