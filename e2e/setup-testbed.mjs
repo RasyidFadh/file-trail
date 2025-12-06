@@ -32,8 +32,11 @@ const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
 packageJson.type = 'module';
 writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
 
-// Install file-trail
-await $`npm install file-trail`;
+// Install file-trail (from npm if post-deploy, from local path if pre-deploy)
+const isPostDeploy = process.env.E2E_POST_DEPLOY === 'true';
+const rootDir = join(e2eDir, '..');
+const fileTrailSource = isPostDeploy ? 'file-trail' : rootDir;
+await $`npm install ${fileTrailSource}`;
 
 // Copy harness.js from e2e/src/harness.js to testbed root
 const harnessSource = join(e2eDir, 'src', 'harness.js');

@@ -32,8 +32,11 @@ const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
 packageJson.type = 'module';
 writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
 
-// Install file-trail and typescript
-await $`npm install file-trail typescript`;
+// Install file-trail (from npm if post-deploy, from local path if pre-deploy) and typescript
+const isPostDeploy = process.env.E2E_POST_DEPLOY === 'true';
+const rootDir = join(e2eDir, '..');
+const fileTrailSource = isPostDeploy ? 'file-trail' : rootDir;
+await $`npm install ${fileTrailSource} typescript`;
 
 // Copy typescript-harness.ts from e2e/src/typescript-harness.ts to testbed root
 const harnessSource = join(e2eDir, 'src', 'typescript-harness.ts');
