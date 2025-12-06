@@ -2,7 +2,14 @@ import path from 'path';
 
 const serilizationPrefix = 'bc@1.0.0:'
 
-export const Breadcrumbs = () => {
+export interface Breadcrumbs {
+  visit: (filePath: string) => void
+  hasVisited: (filePath: string) => boolean
+  hasCompleted: (filePath: string) => boolean
+  serialize: () => string
+}
+
+export const Breadcrumbs = (): Breadcrumbs => {
   const visited: Record<string, boolean> = {}
   const completed: Record<string, boolean> = {}
   let lastDirectory: string | null = null
