@@ -95,7 +95,7 @@ describe(Breadcrumbs.name, () => {
   })
 })
 
-describe('serilization and hydration', () => {
+describe(hydrate.name, () => {
   it('should return the same hasVisited results for both the original and hydrated breadcrumbs', () => {
     // act
     const original = Breadcrumbs()
