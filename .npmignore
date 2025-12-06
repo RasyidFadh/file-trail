@@ -10,6 +10,9 @@ vite.config.ts
 # Tests
 *.spec.ts
 *.test.ts
+*.spec.js
+*.spec.d.ts
+*.spec.d.ts.map
 coverage/
 
 # Development files

@@ -12,6 +12,7 @@ export default defineConfig({
     rollupOptions: {
       external: ['path'],
     },
+    emptyOutDir: false, // Don't clean dist directory to preserve .d.ts files from tsc
   },
   test: {
     globals: true,
