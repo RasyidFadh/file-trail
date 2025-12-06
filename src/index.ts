@@ -57,6 +57,7 @@ export const hydrate = (serialized: string) => {
 
   const raw = serialized.slice(serilizationPrefix.length) || '[]'
   const visitInvocations: string[] = JSON.parse(raw)
+  if (!Array.isArray(visitInvocations)) throw new Error('Invalid serialized output')
   const breadcrumbs = Breadcrumbs()
   visitInvocations.forEach(x => breadcrumbs.visit(x))
   return breadcrumbs

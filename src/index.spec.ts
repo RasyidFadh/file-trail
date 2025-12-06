@@ -185,6 +185,16 @@ describe(hydrate.name, () => {
     // assert
     expect(act).toThrow('Invalid serialized output')
   })
+
+  it('should fail to hydrate when the prefix is completed but the suffix is a JSON object instead of an array', () => {
+    // act
+    const act = () => {
+      hydrate('bc@1.0.0:{}')
+    }
+
+    // assert
+    expect(act).toThrow('Invalid serialized output')
+  })
 })
 
 describe('serialize', () => {
