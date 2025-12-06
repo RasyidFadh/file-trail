@@ -148,3 +148,7 @@ interface FileTrail {
  */
 function hydrate(serialized: string): FileTrail
 ```
+
+## Testing
+
+Built with TDD. Unit tests cover the core functionality, and there's an e2e suite that runs both before publishing (against the local build) and after publishing (against the actual npm package). This catches issues that only show up when the package is installed as a dependency.
