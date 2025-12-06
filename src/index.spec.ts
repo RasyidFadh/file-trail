@@ -143,16 +143,28 @@ describe(hydrate.name, () => {
     expect(original.hasCompleted(notCompleted)).toBe(false)
     expect(hydrated.hasCompleted(notCompleted)).toBe(false)
   })
+
+  it('should hydrate without errors from an original that had no visits', () => {
+    // act
+    const act = () => {
+      const original = Breadcrumbs()
+      const serialized = original.serialize()
+      hydrate(serialized)
+    }
+
+    // assert
+    expect(act).not.toThrow()
+  })
 })
 
 describe('serialize', () => {
-  it('should return an empty string by default', () => {
+  it('should serialize when there are no visits', () => {
     // act
     const breadcrumbs = Breadcrumbs()
     const serialized = breadcrumbs.serialize()
 
     // assert
-    expect(serialized).toBe('')
+    expect(serialized).toBe('bc@1.0.0:[]')
   })
 
   it('should include the version in the serialized output', () => {
