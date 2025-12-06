@@ -35,3 +35,8 @@ export const Breadcrumbs = () => {
     },
   };
 }
+
+export type Breadcrumbs = ReturnType<typeof Breadcrumbs>
+export const serialize = (breadcrumbs: Breadcrumbs) => {
+  return ''
+}

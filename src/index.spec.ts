@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Breadcrumbs } from './index';
+import { Breadcrumbs, serialize } from './index';
 
 describe(Breadcrumbs.name, () => {
   it('should say that I visited a directory when called with the parent directory of a file', () => {
@@ -92,5 +92,16 @@ describe(Breadcrumbs.name, () => {
 
     // assert
     expect(breadcrumbs.hasCompleted('/')).toBe(false)
+  })
+})
+
+describe(serialize.name, () => {
+  it('should return an empty string by default', () => {
+    // act
+    const breadcrumbs = Breadcrumbs()
+    const serialized = serialize(breadcrumbs)
+
+    // assert
+    expect(serialized).toBe('')
   })
 })
