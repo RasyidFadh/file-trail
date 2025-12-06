@@ -27,11 +27,11 @@
     "navigation",
     "progress"
   ],
-  "author": "",
+  "author": "Brian Kotos",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/file-trail.git"
+    "url": "https://github.com/bkotos/file-trail.git"
   },
   "scripts": {
     "build": "tsc && vite build",
