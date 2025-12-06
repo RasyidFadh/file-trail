@@ -175,6 +175,16 @@ describe(hydrate.name, () => {
     // assert
     expect(act).not.toThrow()
   })
+
+  it('should fail to hydrate when the prefix is incompleted', () => {
+    // act
+    const act = () => {
+      hydrate('bc@1.0.0')
+    }
+
+    // assert
+    expect(act).toThrow('Invalid serialized output')
+  })
 })
 
 describe('serialize', () => {
