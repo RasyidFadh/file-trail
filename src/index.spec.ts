@@ -111,15 +111,21 @@ describe(FileTrail.name, () => {
   })
 
   describe('windows', () => {
-    it('should let me visit a windows path', () => {
-      // act
-      const fileTrail = FileTrail()
-      const act = () => {
-        fileTrail.visit('C:\\Users\\jdoe\\Pictures\\2022\\12\\IMG_6532.PNG')
-      }
-
-      // assert
-      expect(act).not.toThrow()
+    const windowsPaths = [
+      'C:\\Users\\jdoe\\Pictures\\2022\\12\\IMG_6532.PNG',
+      'D:\\another\\directory\\file.txt',
+    ]
+    windowsPaths.forEach(path => {
+      it(`should let me visit a windows path: ${path}`, () => {
+        // act
+        const fileTrail = FileTrail()
+        const act = () => {
+          fileTrail.visit(path)
+        }
+  
+        // assert
+        expect(act).not.toThrow()
+      })
     })
   })
 })
