@@ -94,15 +94,18 @@ describe(FileTrail.name, () => {
     expect(fileTrail.hasCompleted('/')).toBe(false)
   })
 
-  it('should throw an error when visiting a relative path', () => {
-    // act
-    const fileTrail = FileTrail()
-    const act = () => {
-      fileTrail.visit('file.txt')
-    }
+  const relativePaths = ['file.txt', '..', './file.txt', '../file.txt', '~/file.txt', '~']
+  relativePaths.forEach(path => {
+    it(`should throw an error when visiting a relative path: ${path}`, () => {
+      // act
+      const fileTrail = FileTrail()
+      const act = () => {
+        fileTrail.visit(path)
+      }
 
-    // assert
-    expect(act).toThrow('Relative paths are not currently supported. Is this something you would find value in? I would love to hear from you: https://github.com/bkotos/file-trail/issues/new')
+      // assert
+      expect(act).toThrow('Relative paths are not currently supported. Is this something you would find value in? I would love to hear from you: https://github.com/bkotos/file-trail/issues/new')
+    })
   })
 })
 
