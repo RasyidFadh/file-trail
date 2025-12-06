@@ -40,6 +40,7 @@
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
     "test:no-watch": "vitest --no-watch",
+    "e2e": "cd e2e && npm test",
     "publish:patch": "npm run test:no-watch && npm version patch && npm publish",
     "publish:minor": "npm run test:no-watch && npm version minor && npm publish",
     "publish:major": "npm run test:no-watch && npm version major && npm publish"
