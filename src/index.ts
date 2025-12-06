@@ -54,8 +54,8 @@ export const Breadcrumbs = (): Breadcrumbs => {
 export const hydrate = (serialized: string) => {
   const prefix = serialized.slice(0, serilizationPrefix.length)
   if (prefix !== serilizationPrefix) throw new Error('Invalid serialized output')
-    
-  const raw = serialized.slice(serilizationPrefix.length)
+
+  const raw = serialized.slice(serilizationPrefix.length) || '[]'
   const visitInvocations: string[] = JSON.parse(raw)
   const breadcrumbs = Breadcrumbs()
   visitInvocations.forEach(x => breadcrumbs.visit(x))

@@ -165,6 +165,16 @@ describe(hydrate.name, () => {
     // assert
     expect(act).toThrow('Invalid serialized output')
   })
+
+  it('should hydrate without error when there is a prefix but an empty suffix', () => {
+    // act
+    const act = () => {
+      hydrate('bc@1.0.0:')
+    }
+
+    // assert
+    expect(act).not.toThrow()
+  })
 })
 
 describe('serialize', () => {
