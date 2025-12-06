@@ -83,4 +83,14 @@ describe(Breadcrumbs.name, () => {
     // assert
     expect(breadcrumbs.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(true)
   })
+
+  it('should NOT mark the root directory as completed after visiting two descendants that have different parents', () => {
+    // act
+    const breadcrumbs = Breadcrumbs()
+    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG')
+
+    // assert
+    expect(breadcrumbs.hasCompleted('/')).toBe(false)
+  })
 })
