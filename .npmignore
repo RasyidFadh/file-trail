@@ -1,0 +1,28 @@
+# Source files
+src/
+*.ts
+!*.d.ts
+
+# Build config
+tsconfig.json
+vite.config.ts
+
+# Tests
+*.spec.ts
+*.test.ts
+coverage/
+
+# Development files
+.git/
+.gitignore
+.DS_Store
+*.log
+
+# Dependencies
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
