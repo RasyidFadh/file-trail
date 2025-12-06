@@ -47,9 +47,38 @@ const restored = hydrate(readFileSync('.file-trail', 'utf-8'));
 
 ## API
 
-- `FileTrail()` - Create a new trail instance
-- `visit(filePath: string)` - Record a file visit (marks file and all ancestors as visited)
-- `hasVisited(filePath: string): boolean` - Check if a path was visited
-- `hasCompleted(filePath: string): boolean` - Check if a directory is completed (visited then left)
-- `serialize(): string` - Serialize state to string
-- `hydrate(serialized: string): FileTrail` - Restore from serialized string
+```typescript
+/**
+ * Creates a new FileTrail instance for tracking file and directory visits.
+ */
+function FileTrail(): FileTrail
+
+interface FileTrail {
+  /**
+   * Records a file visit. Marks the file and all its ancestor directories as visited.
+   */
+  visit(filePath: string): void
+
+  /**
+   * Checks if a file or directory has been visited.
+   */
+  hasVisited(filePath: string): boolean
+
+  /**
+   * Checks if a directory has been completed. A directory is completed when
+   * at least one file in it has been visited, and then a file in a different
+   * directory has been visited afterward.
+   */
+  hasCompleted(filePath: string): boolean
+
+  /**
+   * Serializes the trail state to a string for persistence.
+   */
+  serialize(): string
+}
+
+/**
+ * Restores a FileTrail instance from a serialized string.
+ */
+function hydrate(serialized: string): FileTrail
+```
