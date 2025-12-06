@@ -26,4 +26,27 @@ describe('e2e', () => {
     // assert
     expect(actualOutput.trim()).toBe(expectedOutput.trim());
   });
+
+  it('should compile TypeScript testbed and match expected output', () => {
+    // arrange
+    const expectedOutputPath = join(__dirname, 'expected-e2e-output.txt');
+    const expectedOutput = readFileSync(expectedOutputPath, 'utf-8');
+
+    // act
+    execSync('npm run testbed:setup-typescript', {
+      cwd: e2eDir,
+      stdio: 'inherit',
+    });
+    execSync('npm run testbed:compile-typescript', {
+      cwd: e2eDir,
+      stdio: 'inherit',
+    });
+    const actualOutput = execSync('npm run -s testbed:run', {
+      cwd: e2eDir,
+      encoding: 'utf-8',
+    });
+
+    // assert
+    expect(actualOutput.trim()).toBe(expectedOutput.trim());
+  });
 });

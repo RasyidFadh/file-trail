@@ -6,7 +6,9 @@
   "scripts": {
     "test": "vitest --no-watch",
     "testbed:setup": "zx setup-testbed.mjs",
-    "testbed:run": "cd testbed && node harness.js"
+    "testbed:run": "cd testbed && node harness.js",
+    "testbed:setup-typescript": "zx setup-typescript-testbed.mjs",
+    "testbed:compile-typescript": "zx compile-typescript-testbed.mjs"
   },
   "devDependencies": {
     "vitest": "^1.1.0",
