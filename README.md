@@ -1,5 +1,10 @@
 # 🛤️ file-trail
 
+[![npm version](https://img.shields.io/npm/v/file-trail.svg)](https://www.npmjs.com/package/file-trail)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/bkotos/file-trail/actions/workflows/ci.yml/badge.svg)](https://github.com/bkotos/file-trail/actions/workflows/ci.yml)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue.svg)](https://www.typescriptlang.org/)
+
 Keep track of which files and directories you've visited, and detect when you've finished exploring a directory (moved on to a different one). Useful for file system navigation, progress tracking, and resumable operations.
 
 ## What It Does
