@@ -93,15 +93,35 @@ describe(Breadcrumbs.name, () => {
     // assert
     expect(breadcrumbs.hasCompleted('/')).toBe(false)
   })
+})
 
-  describe('serialize', () => {
-    it('should return an empty string by default', () => {
-      // act
-      const breadcrumbs = Breadcrumbs()
-      const serialized = breadcrumbs.serialize()
-  
-      // assert
-      expect(serialized).toBe('')
+describe('serilization and hydration', () => {
+  it('should return the same hasVisited results for both the original and hydrated breadcrumbs', () => {
+    // act
+    const original = Breadcrumbs()
+    original.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const serialized = original.serialize()
+    const hydrated = hydrate(serialized)
+
+    // assert - visited
+    const visited = [
+      '/var/home/jdoe/Pictures/2022/12',
+      '/var/home/jdoe/Pictures/2022',
+      '/'
+    ]
+    visited.forEach(x => {
+      expect(original.hasVisited(x)).toBe(true)
+      expect(hydrated.hasVisited(x)).toBe(true)
+    })
+
+    // assert - NOT visited
+    const notVisited = [
+      '/var/home/jdoe/Pictures/2022/11',
+      '/var/home/jdoe/Pictures/2022/12/13',
+    ]
+    notVisited.forEach(x => {
+      expect(original.hasVisited(x)).toBe(false)
+      expect(hydrated.hasVisited(x)).toBe(false)
     })
   })
 })

@@ -21,9 +21,12 @@ export const Breadcrumbs = () => {
     } while (current !== '/')
     visited['/'] = true
   }
+
+  const visitInvocations: string[] = []
   
   return {
     visit: (filePath: string) => {
+      visitInvocations.push(filePath)
       markCompleted(filePath)
       markVisited(filePath)
     },
@@ -34,11 +37,14 @@ export const Breadcrumbs = () => {
       return completed[filePath] || false
     },
     serialize: () => {
-      return ''
+      return JSON.stringify(visitInvocations)
     }
   };
 }
 
 export const hydrate = (serialized: string) => {
-  return Breadcrumbs()
+  const visitInvocations: string[] = JSON.parse(serialized)
+  const breadcrumbs = Breadcrumbs()
+  visitInvocations.forEach(x => breadcrumbs.visit(x))
+  return breadcrumbs
 }
