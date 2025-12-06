@@ -1,6 +1,6 @@
 {
   "name": "file-trail",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Track file and directory visits with completion detection for Node.js. TypeScript library that helps you know what you've seen and when you've finished exploring directories. Includes serialization support.",
   "type": "module",
   "main": "./dist/index.cjs",
