@@ -11,9 +11,9 @@ npm install file-trail
 ## Usage
 
 ```typescript
-import { Breadcrumbs } from 'file-trail';
+import { FileTrail } from 'file-trail';
 
-const trail = Breadcrumbs();
+const trail = FileTrail();
 
 // Visit files
 trail.visit('/path/to/file1.txt');
@@ -31,10 +31,10 @@ trail.hasCompleted('/path/to'); // true (moved to different directory)
 ## Serialization
 
 ```typescript
-import { Breadcrumbs, hydrate } from 'file-trail';
+import { FileTrail, hydrate } from 'file-trail';
 import { writeFileSync, readFileSync } from 'fs';
 
-const trail = Breadcrumbs();
+const trail = FileTrail();
 trail.visit('/path/to/file.txt');
 
 // Save
@@ -47,9 +47,9 @@ const restored = hydrate(readFileSync('.file-trail', 'utf-8'));
 
 ## API
 
-- `Breadcrumbs()` - Create a new trail instance
+- `FileTrail()` - Create a new trail instance
 - `visit(filePath: string)` - Record a file visit (marks file and all ancestors as visited)
 - `hasVisited(filePath: string): boolean` - Check if a path was visited
 - `hasCompleted(filePath: string): boolean` - Check if a directory is completed (visited then left)
 - `serialize(): string` - Serialize state to string
-- `hydrate(serialized: string): Breadcrumbs` - Restore from serialized string
+- `hydrate(serialized: string): FileTrail` - Restore from serialized string
