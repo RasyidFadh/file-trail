@@ -33,10 +33,12 @@ export const Breadcrumbs = () => {
     hasCompleted: (filePath: string) => {
       return completed[filePath] || false
     },
+    serialize: () => {
+      return ''
+    }
   };
 }
 
-export type Breadcrumbs = ReturnType<typeof Breadcrumbs>
-export const serialize = (breadcrumbs: Breadcrumbs) => {
-  return ''
+export const hydrate = (serialized: string) => {
+  return Breadcrumbs()
 }
