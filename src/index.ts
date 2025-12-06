@@ -59,14 +59,19 @@ const jsonParse = (raw: string) => {
   }
 }
 
-export const hydrate = (serialized: string) => {
-  const prefix = serialized.slice(0, serilizationPrefix.length)
-  if (prefix !== serilizationPrefix) throw new Error('Invalid serialized output')
+export const hydrate = (serialized: string): FileTrail => {
+  if (!serialized.startsWith(serilizationPrefix)) {
+    throw new Error('Invalid serialized output')
+  }
 
   const raw = serialized.slice(serilizationPrefix.length) || '[]'
-  const visitInvocations: string[] = jsonParse(raw)
-  if (!Array.isArray(visitInvocations)) throw new Error('Invalid serialized output')
+  const visitInvocations = jsonParse(raw)
+  
+  if (!Array.isArray(visitInvocations)) {
+    throw new Error('Invalid serialized output')
+  }
+
   const instance = FileTrail()
-  visitInvocations.forEach(x => instance.visit(x))
+  visitInvocations.forEach(instance.visit)
   return instance
 }
