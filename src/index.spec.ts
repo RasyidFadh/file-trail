@@ -155,6 +155,16 @@ describe(hydrate.name, () => {
     // assert
     expect(act).not.toThrow()
   })
+
+  it('should fail to hydrate when there is no prefix in the serialized output', () => {
+    // act
+    const act = () => {
+      hydrate('[]')
+    }
+
+    // assert
+    expect(act).toThrow('Invalid serialized output')
+  })
 })
 
 describe('serialize', () => {
