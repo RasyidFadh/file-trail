@@ -51,12 +51,20 @@ export const Breadcrumbs = (): Breadcrumbs => {
   };
 }
 
+const jsonParse = (raw: string) => {
+  try {
+    return JSON.parse(raw)
+  } catch (error) {
+    throw new Error('Invalid serialized output')
+  }
+}
+
 export const hydrate = (serialized: string) => {
   const prefix = serialized.slice(0, serilizationPrefix.length)
   if (prefix !== serilizationPrefix) throw new Error('Invalid serialized output')
 
   const raw = serialized.slice(serilizationPrefix.length) || '[]'
-  const visitInvocations: string[] = JSON.parse(raw)
+  const visitInvocations: string[] = jsonParse(raw)
   if (!Array.isArray(visitInvocations)) throw new Error('Invalid serialized output')
   const breadcrumbs = Breadcrumbs()
   visitInvocations.forEach(x => breadcrumbs.visit(x))
