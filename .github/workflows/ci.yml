@@ -28,3 +28,12 @@ jobs:
 
       - name: Run tests
         run: npm test -- --run
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run e2e tests (pre-deploy)
+        run: npm run e2e
+
+      - name: Run e2e tests (post-deploy)
+        run: npm run e2e:post-deploy
