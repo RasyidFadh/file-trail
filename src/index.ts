@@ -1,15 +1,15 @@
 import path from 'path';
 
-const serilizationPrefix = 'bc@1.0.0:'
+const serilizationPrefix = 'ft@1.0.0:'
 
-export interface Breadcrumbs {
+export interface FileTrail {
   visit: (filePath: string) => void
   hasVisited: (filePath: string) => boolean
   hasCompleted: (filePath: string) => boolean
   serialize: () => string
 }
 
-export const Breadcrumbs = (): Breadcrumbs => {
+export const FileTrail = (): FileTrail => {
   const visited: Record<string, boolean> = {}
   const completed: Record<string, boolean> = {}
   let lastDirectory: string | null = null
@@ -66,7 +66,7 @@ export const hydrate = (serialized: string) => {
   const raw = serialized.slice(serilizationPrefix.length) || '[]'
   const visitInvocations: string[] = jsonParse(raw)
   if (!Array.isArray(visitInvocations)) throw new Error('Invalid serialized output')
-  const breadcrumbs = Breadcrumbs()
-  visitInvocations.forEach(x => breadcrumbs.visit(x))
-  return breadcrumbs
+  const instance = FileTrail()
+  visitInvocations.forEach(x => instance.visit(x))
+  return instance
 }

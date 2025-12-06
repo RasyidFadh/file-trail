@@ -1,104 +1,104 @@
 import { describe, it, expect } from 'vitest';
-import { Breadcrumbs, hydrate } from './index';
+import { FileTrail, hydrate } from './index';
 
-describe(Breadcrumbs.name, () => {
+describe(FileTrail.name, () => {
   it('should say that I visited a directory when called with the parent directory of a file', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
 
     // assert
-    expect(breadcrumbs.hasVisited('/var/home/jdoe/Pictures/2022/12')).toBe(true)
+    expect(fileTrail.hasVisited('/var/home/jdoe/Pictures/2022/12')).toBe(true)
   })
 
   it('should say that I visited a directory when called with the file that I just visited', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
 
     // assert
-    expect(breadcrumbs.hasVisited('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')).toBe(true)
+    expect(fileTrail.hasVisited('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')).toBe(true)
   })
 
   it('should say I did NOT visit a directory when called with a different directory than the directory of the file I just visited', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
 
     // assert
-    expect(breadcrumbs.hasVisited('/var/home/jdoe/Pictures/2022/11')).toBe(false)
+    expect(fileTrail.hasVisited('/var/home/jdoe/Pictures/2022/11')).toBe(false)
   })
 
   it('should not say that I vitied the root directory when no visits have been made', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
+    const fileTrail = FileTrail()
 
     // assert
-    expect(breadcrumbs.hasVisited('/')).toBe(false)
+    expect(fileTrail.hasVisited('/')).toBe(false)
   })
 
   it('should say that I vitied the grandparent directory after visiting a file', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
 
     // assert
-    expect(breadcrumbs.hasVisited('/var/home/jdoe/Pictures/2022')).toBe(true)
+    expect(fileTrail.hasVisited('/var/home/jdoe/Pictures/2022')).toBe(true)
   })
 
   it('should say that I vitied root directory after visiting a file', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
 
     // assert
-    expect(breadcrumbs.hasVisited('/')).toBe(true)
+    expect(fileTrail.hasVisited('/')).toBe(true)
   })
 
   it('should say that I did NOT complete a directory after visiting a file in it once', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
 
     // assert
-    expect(breadcrumbs.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(false)
+    expect(fileTrail.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(false)
   })
 
   it('should NOT say that I completed a directory after visiting two files in it', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6533.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6533.PNG')
 
     // assert
-    expect(breadcrumbs.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(false)
+    expect(fileTrail.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(false)
   })
 
   it('should say that I completed a directory after visiting a file in it, and then visiting a file in a different directory', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG')
 
     // assert
-    expect(breadcrumbs.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(true)
+    expect(fileTrail.hasCompleted('/var/home/jdoe/Pictures/2022/12')).toBe(true)
   })
 
   it('should NOT mark the root directory as completed after visiting two descendants that have different parents', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG')
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG')
 
     // assert
-    expect(breadcrumbs.hasCompleted('/')).toBe(false)
+    expect(fileTrail.hasCompleted('/')).toBe(false)
   })
 })
 
 describe(hydrate.name, () => {
-  it('should return the same hasVisited results for both the original and hydrated breadcrumbs', () => {
+  it('should return the same hasVisited results for both the original and hydrated fileTrail', () => {
     // act
-    const original = Breadcrumbs()
+    const original = FileTrail()
     original.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
     const serialized = original.serialize()
     const hydrated = hydrate(serialized)
@@ -125,9 +125,9 @@ describe(hydrate.name, () => {
     })
   })
 
-  it('should return the same hasCompleted results for both the original and hydrated breadcrumbs', () => {
+  it('should return the same hasCompleted results for both the original and hydrated fileTrail', () => {
     // act
-    const original = Breadcrumbs()
+    const original = FileTrail()
     original.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
     original.visit('/var/home/jdoe/Pictures/2022/11/IMG_6533.PNG')
     const serialized = original.serialize()
@@ -147,7 +147,7 @@ describe(hydrate.name, () => {
   it('should hydrate without errors from an original that had no visits', () => {
     // act
     const act = () => {
-      const original = Breadcrumbs()
+      const original = FileTrail()
       const serialized = original.serialize()
       hydrate(serialized)
     }
@@ -169,7 +169,7 @@ describe(hydrate.name, () => {
   it('should hydrate without error when there is a prefix but an empty suffix', () => {
     // act
     const act = () => {
-      hydrate('bc@1.0.0:')
+      hydrate('ft@1.0.0:')
     }
 
     // assert
@@ -179,7 +179,7 @@ describe(hydrate.name, () => {
   it('should fail to hydrate when the prefix is incompleted', () => {
     // act
     const act = () => {
-      hydrate('bc@1.0.0')
+      hydrate('ft@1.0.0')
     }
 
     // assert
@@ -189,7 +189,7 @@ describe(hydrate.name, () => {
   it('should fail to hydrate when the prefix is completed but the suffix is a JSON object instead of an array', () => {
     // act
     const act = () => {
-      hydrate('bc@1.0.0:{}')
+      hydrate('ft@1.0.0:{}')
     }
 
     // assert
@@ -199,7 +199,7 @@ describe(hydrate.name, () => {
   it('should fail to hydrate when the prefix is completed but the suffix is not valid JSON', () => {
     // act
     const act = () => {
-      hydrate('bc@1.0.0:not valid JSON')
+      hydrate('ft@1.0.0:not valid JSON')
     }
 
     // assert
@@ -210,20 +210,20 @@ describe(hydrate.name, () => {
 describe('serialize', () => {
   it('should serialize when there are no visits', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    const serialized = breadcrumbs.serialize()
+    const fileTrail = FileTrail()
+    const serialized = fileTrail.serialize()
 
     // assert
-    expect(serialized).toBe('bc@1.0.0:[]')
+    expect(serialized).toBe('ft@1.0.0:[]')
   })
 
   it('should include the version in the serialized output', () => {
     // act
-    const breadcrumbs = Breadcrumbs()
-    breadcrumbs.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
-    const serialized = breadcrumbs.serialize()
+    const fileTrail = FileTrail()
+    fileTrail.visit('/var/home/jdoe/Pictures/2022/12/IMG_6532.PNG')
+    const serialized = fileTrail.serialize()
 
     // assert
-    expect(serialized.startsWith('bc@1.0.0:')).toBe(true)
+    expect(serialized.startsWith('ft@1.0.0:')).toBe(true)
   })
 })
