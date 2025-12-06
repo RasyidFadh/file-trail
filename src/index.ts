@@ -1,3 +1,8 @@
-export function add(a: number, b: number): number {
-  return a + b;
+export const Breadcrumbs = () => {
+  return {
+    visit: (path: string) => {},
+    hasVisited: (path: string) => {
+      return true
+    },
+  };
 }
