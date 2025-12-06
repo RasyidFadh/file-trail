@@ -14,5 +14,8 @@ export const Breadcrumbs = () => {
     hasVisited: (filePath: string) => {
       return visited[filePath] || false
     },
+    hasCompleted: (filePath: string) => {
+      return false
+    },
   };
 }
